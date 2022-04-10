@@ -9,6 +9,11 @@
     </div>
 </section>
 <section class="catalog bg-light">
+    <div *ngFor="let alert of alerts">
+        <alert [type]="alert.type"
+            [dismissOnTimeout]="alert.timeout"
+            [dismissible]="true">{{ alert.msg }}</alert>
+    </div>
     <div class="row">
         <div class="col-md-4"
             *ngFor="let productItem of products">
