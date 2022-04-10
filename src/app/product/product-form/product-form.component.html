@@ -1,0 +1,106 @@
+<div class="py-5 text-center">
+    <h2>{{ !!isEditFlowActive ? 'Редактировать товар' : 'Создать товар' }}</h2>
+    <button class="btn btn-secondary my-2"
+        (click)="onNavigateToCatalog()">Перейти к списку товаров</button>
+</div>
+<div *ngFor="let alert of alerts">
+    <alert [type]="alert.type"
+        [dismissOnTimeout]="alert.timeout"
+        [dismissible]="true">{{ alert.msg }}</alert>
+</div>
+<div class="col-md-8 order-md-1 mx-auto">
+    <form class="needs-validation"
+        [formGroup]="productForm"
+        (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+            <label for="title">Название</label>
+            <input type="text"
+                class="form-control"
+                id="title"
+                placeholder="Ведите название"
+                formControlName="title"
+                [ngClass]="{'is-invalid': isControlInvalid('title') }">
+            <div class="invalid-feedback"
+                *ngIf="isControlInvalid('title')">
+                Название обязательное поле
+            </div>
+        </div>
+        <div class=" mb-3">
+            <label for="category">Категория</label>
+            <select class="custom-select d-block w-100"
+                id="category"
+                formControlName="category"
+                [ngClass]="{'is-invalid': isControlInvalid('category') }">
+                <option value="">Выберите...</option>
+                <option value="smartphones">Смартфоны</option>
+                <option value="laptops">Ноутбуки</option>
+            </select>
+            <div class="invalid-feedback"
+                *ngIf="isControlInvalid('category')">
+                Категория обязательное поле
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="brand">Название бренда</label>
+            <input type="text"
+                class="form-control"
+                id="brand"
+                placeholder="Ведите название бренда"
+                formControlName="brand"
+                [ngClass]="{'is-invalid': isControlInvalid('brand') }">
+            <div class="invalid-feedback"
+                *ngIf="isControlInvalid('brand')">
+                Название бренда обязательное поле
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="description">Описание</label>
+            <textarea class="form-control"
+                id="description"
+                placeholder="Ведите название"
+                rows="3"
+                formControlName="description"
+                [ngClass]="{'is-invalid': isControlInvalid('description') }"></textarea>
+            <div class="invalid-feedback"
+                *ngIf="isControlInvalid('description')">
+                Описание обязательное поле
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="price">Цена</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">$</span>
+                    </div>
+                    <input type="text"
+                        class="form-control"
+                        id="price"
+                        placeholder="Ведите цену"
+                        formControlName="price"
+                        [ngClass]="{'is-invalid': isControlInvalid('price') }">
+                    <div class="invalid-feedback"
+                        *ngIf="isControlInvalid('price')">
+                        Цена обязательное поле
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="stock">Количество</label>
+                <input type="text"
+                    class="form-control"
+                    id="stock"
+                    placeholder="Ведите количество"
+                    formControlName="stock"
+                    [ngClass]="{'is-invalid': isControlInvalid('stock') }">
+                <div class="invalid-feedback"
+                    *ngIf="isControlInvalid('stock')">
+                    Количество обязательное поле
+                </div>
+            </div>
+        </div>
+        <hr class="mb-4">
+        <button class="btn btn-primary btn-lg btn-block"
+            type="submit">Сохранить</button>
+    </form>
+</div>
